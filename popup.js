@@ -20,6 +20,22 @@ function showStatus(message, type = 'success') {
   statusElement.className = `status ${type}`;
 }
 
+// 获取浏览器信息
+function getBrowserInfo() {
+  const userAgent = navigator.userAgent;
+  if (userAgent.includes('Edg/')) {
+    return 'Edge';
+  } else if (userAgent.includes('Chrome/')) {
+    return 'Chrome';
+  } else if (userAgent.includes('Firefox/')) {
+    return 'Firefox';
+  } else if (userAgent.includes('Safari/') && !userAgent.includes('Chrome/')) {
+    return 'Safari';
+  } else {
+    return '未知浏览器';
+  }
+}
+
 // 获取当前标签页URL和标题
 async function getCurrentTabInfo() {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -87,7 +103,8 @@ async function addRecord(url, title, accessToken) {
           '链结': {
             'text': title,
             'link': url
-          }
+          },
+          '收藏来源': getBrowserInfo()
         }
       })
     });
