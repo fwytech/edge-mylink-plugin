@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>飞书多维表格链接采集器</title>
+  <link rel="stylesheet" href="lib/web-components.min.css">
+  <style>
+    body {
+      width: 300px;
+      padding: 16px;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .status {
+      padding: 8px;
+      border-radius: 4px;
+      display: none;
+    }
+    .success {
+      background-color: #dff6dd;
+      color: #107c10;
+    }
+    .error {
+      background-color: #fde7e9;
+      color: #c50f1f;
+    }
+    .loading {
+      background-color: #f3f2f1;
+      color: #323130;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <fluent-button appearance="accent" id="saveButton">
+      一键保存网页链接到飞书多维表格
+    </fluent-button>
+    <div id="statusMessage" class="status"></div>
+  </div>
+  <script type="module" src="lib/web-components.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
