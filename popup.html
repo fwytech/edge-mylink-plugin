@@ -4,19 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>飞书多维表格链接采集器</title>
-  <link rel="stylesheet" href="lib/web-components.min.css">
   <style>
     body {
       width: 300px;
       padding: 16px;
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
+      background: url('images/background.svg') no-repeat center center;
+      background-size: cover;
     }
     .container {
       display: flex;
       flex-direction: column;
       gap: 16px;
+    }
+    .read-status, .article-purpose, .usage-time, .article-category {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 8px;
+      gap: 24px;
+      padding: 8px;
+      background-color: #ffffff;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .title {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 600;
+      color: #323130;
+      text-align: center;
     }
     .status {
       padding: 8px;
@@ -35,16 +52,70 @@
       background-color: #f3f2f1;
       color: #323130;
     }
+    button {
+      padding: 8px 16px;
+      background-color: #0078d4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #106ebe;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <fluent-button appearance="accent" id="saveButton">
+    <h1 class="title">随手记</h1>
+    <div class="read-status">
+      <label>
+        <input type="radio" name="readStatus" value="unread" checked> 仅记录
+      </label>
+      <label>
+        <input type="radio" name="readStatus" value="read"> 已阅读
+      </label>
+    </div>
+    <div class="article-purpose">
+      <label>
+        <input type="radio" name="articlePurpose" value="development" checked> 研发用
+      </label>
+      <label>
+        <input type="radio" name="articlePurpose" value="learning"> 学习用
+      </label>
+    </div>
+    <div class="usage-time">
+      <label>
+        <input type="radio" name="usageTime" value="future" checked> 以后会用
+      </label>
+      <label>
+        <input type="radio" name="usageTime" value="soon"> 最近就用
+      </label>
+      <label>
+        <input type="radio" name="usageTime" value="favorite"> 好文收藏
+      </label>
+    </div>
+    <div class="article-category">
+      <select id="articleCategory" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+        <option value="综合应用" selected>综合应用</option>
+        <option value="AIGC应用">AIGC应用</option>
+        <option value="AI 智能体">AI 智能体</option>
+        <option value="AI应用开发">AI应用开发</option>
+        <option value="AI 编程">AI 编程</option>
+        <option value="MCP">MCP</option>
+        <option value="大模型开发与应用">大模型开发与应用</option>
+        <option value="飞书AI">飞书AI</option>
+        <option value="AI 工具使用">AI 工具使用</option>
+        <option value="RPA智能自动化">RPA智能自动化</option>
+        <option value="提示词工程">提示词工程</option>
+        <option value="其他-暂未分类">其他-暂未分类</option>
+      </select>
+    </div>
+    <button id="saveButton">
       一键保存网页链接到飞书多维表格
-    </fluent-button>
+    </button>
     <div id="statusMessage" class="status"></div>
   </div>
-  <script type="module" src="lib/web-components.min.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

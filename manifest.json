@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "飞书多维表格链接采集器",
-  "version": "2.0",
+  "name": "随手记：飞书多维表格链结采集器",
+  "version": "3.0.0",
   "description": "一键保存网页链接到飞书多维表格的Edge浏览器扩展",
   "icons": {
     "16": "images/icon16.png",

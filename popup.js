@@ -104,7 +104,29 @@ async function addRecord(url, title, accessToken) {
             'text': title,
             'link': url
           },
-          '收藏来源': getBrowserInfo()
+          '收藏来源': getBrowserInfo(),
+          '阅读状态': (() => {
+            const readStatusEl = document.querySelector('input[name="readStatus"]:checked');
+            return readStatusEl ? (readStatusEl.value === 'read' ? '已阅读' : '仅记录') : '仅记录';
+          })(),
+          '文章用途': (() => {
+            const purposeEl = document.querySelector('input[name="articlePurpose"]:checked');
+            return purposeEl ? (purposeEl.value === 'development' ? '研发用' : '学习用') : '研发用';
+          })(),
+          '使用时间': (() => {
+            const usageTimeEl = document.querySelector('input[name="usageTime"]:checked');
+            if (!usageTimeEl) return '以后会用';
+            switch(usageTimeEl.value) {
+              case 'future': return '以后会用';
+              case 'soon': return '最近就用';
+              case 'favorite': return '好文收藏';
+              default: return '以后会用';
+            }
+          })(),
+          '文章分类': (() => {
+            const categoryEl = document.getElementById('articleCategory');
+            return categoryEl ? categoryEl.value : '综合应用';
+          })()
         }
       })
     });
@@ -136,6 +158,14 @@ async function addRecord(url, title, accessToken) {
 // 初始化事件监听
 document.addEventListener('DOMContentLoaded', () => {
   const saveButton = document.getElementById('saveButton');
+  const radioButtons = document.querySelectorAll('input[name="readStatus"]');
+
+  // 监听单选按钮的变化
+  radioButtons.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      console.log('阅读状态已更改:', e.target.value);
+    });
+  });
   
   saveButton.addEventListener('click', async () => {
     try {
